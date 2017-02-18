@@ -19,6 +19,16 @@ h1 {
   text-align: center;
 }
 
+.logo {
+	background: url('img/logo.png');
+	height: 227px;
+    background-repeat: no-repeat;
+    background-size: 228px 228px;
+    background-position-x: 32px;
+    background-position-y: -5px;
+    margin-bottom: 21px;
+}
+
 .sendButton {
   display: block;
   font-size: 16pt;
@@ -91,6 +101,10 @@ h1 {
 .label-roomHeader,
 .label-padded {
 	padding: 5px;
+}
+
+.label-instruction {
+	font-style: italic;
 }
 
 .label-header {
@@ -350,7 +364,7 @@ h1 {
 }
 
 .button-game-deal {
-	background: linear-gradient(rgba(55, 168, 108, 1) rgba(168, 168, 168, .5));
+	background: linear-gradient(rgba(55, 168, 108, 1), rgba(168, 168, 168, .5));
 	box-shadow: inset 0px 0px 0px, 0px 2px 0px 0px rgba(55, 168, 108, 1), 0px 3px 4px grey;
     border-radius: 80px;
 }
@@ -365,7 +379,7 @@ h1 {
 
 
 .hand-panel {
-    height: 117px;
+    height: 118px;
     width: 85px;
     border-radius: 3px;
     background: radial-gradient(rgba(196, 196, 196, .5), rgba(196, 196, 196, .1));
@@ -423,15 +437,16 @@ h1 {
 .account-anchor-icon {
     border-radius: 50px;
     background-color: white;
-    background-image: url(img/AccountManagementIcon.png);
+    background-image: url(img/logo.png);
     height: 60px;
     width: 60px;
-    background-size: 75%;
+    background-size: 100%;
     background-repeat: no-repeat;
     background-position: center center;
     display: inline-block;
     border: 3px solid black;
 }
+
 .back-anchor-icon:hover,
 .account-anchor-icon:hover {
 	transform: scale(1.1);
@@ -446,8 +461,8 @@ h1 {
     border: 3px solid white;
 }
 
-.standLabel {
-	    z-index: 100;
+.gameLabel {
+	z-index: 100;
     color: black;
     font-size: 26pt;
     font-weight: bold;
@@ -455,10 +470,17 @@ h1 {
     padding: 10px;
     position: absolute;
     border-radius: 6px;
-    background: rgba(255, 215, 0, 0.55);
+/*     background: rgba(255, 215, 0, 0.55); */
     box-shadow: 0 0 53px 3px black;
-    transform: skewX(-35deg);
     line-height: 16px;
     left: 17px;
     top: 40px;
+}
+
+.gameLabel-bust {
+	background-color: rgb(165, 54, 54);
+}
+
+.gameLabel-stand {
+	background: rgb(55, 168, 108);
 }

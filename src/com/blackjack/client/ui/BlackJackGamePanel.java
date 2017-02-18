@@ -29,6 +29,7 @@ public class BlackJackGamePanel extends SimplePanel {
 	private HandPanel dealerHandPanel;
 	private Button dealButton;
 	private Label betLabelValue;
+	private Label instructionLabel;
 	
 	
 	public BlackJackGamePanel() {
@@ -73,6 +74,12 @@ public class BlackJackGamePanel extends SimplePanel {
 		betLabelValue.setStylePrimaryName("label");
 		betLabelValue.addStyleDependentName("goldFont");
 		
+		instructionLabel = new Label();
+		instructionLabel.setStylePrimaryName("label");
+		instructionLabel.addStyleDependentName("goldFont");
+		instructionLabel.addStyleDependentName("instruction");
+		instructionLabel.addStyleName("centered");
+		
 		chip1 = new ChipButton(ChipButton.ChipValue.ONE);
 		chip5 = new ChipButton(ChipButton.ChipValue.FIVE);
 		chip25 = new ChipButton(ChipButton.ChipValue.TWENTY_FIVE);
@@ -93,6 +100,7 @@ public class BlackJackGamePanel extends SimplePanel {
 		content.add(playerHandPanel);
 		content.add(dealerHandPanel);
 		content.add(chipPanel);
+		content.add(instructionLabel);
 		
 		this.add(content);
 	}
@@ -118,6 +126,14 @@ public class BlackJackGamePanel extends SimplePanel {
 		dealerHandPanel.stand();
 	}
 	
+	public void playerBust() {
+		playerHandPanel.bust();
+	}
+	
+	public void dealerBust() {
+		dealerHandPanel.bust();
+	}
+	
 	/**
 	 * Deals a card to the player, will not allow more than 
 	 * two cards 
@@ -140,7 +156,7 @@ public class BlackJackGamePanel extends SimplePanel {
 	public void dealDealerCard(Card card) {
 		int numCards = dealerHandPanel.getNumberPrimaryCards();
 		if (numCards < 2) {
-			if (numCards == 1) {
+			if (numCards == 0) {
 				dealerHandPanel.hitFaceDown(card);
 			} else {
 				dealerHandPanel.hit(card);
@@ -298,7 +314,7 @@ public class BlackJackGamePanel extends SimplePanel {
 	 * @param button the button to disable/enable
 	 * @param enabled if false will disable the button, if true will enable it
 	 */
-	public void enabled(GameButton.GameButtonType button, boolean enabled){
+	public void enableButton(GameButton.GameButtonType button, boolean enabled){
 		switch(button){
 			case INSURANCE:
 				insuranceButton.setEnabled(enabled);
@@ -350,7 +366,29 @@ public class BlackJackGamePanel extends SimplePanel {
 		chip50.setEnabled(false);
 		chip100.setEnabled(false);		
 	}
-
 	
+	/**
+	 * Turns over the dealers down card
+	 */
+	public void showDealerCard() {
+		dealerHandPanel.showDealerCard();
+	}
 	
+	/**
+	 * Sets the panel back to the starting hand state
+	 */
+	public void reset() {
+		disableAllButtons();
+		chipsEnabled(true);
+		bet(0);
+	}
+	
+	public void resetHands() {
+		playerHandPanel.reset();
+		dealerHandPanel.reset();
+	}
+	
+	public void displayInstruction(String message) {
+		this.instructionLabel.setText(message);
+	}
 }

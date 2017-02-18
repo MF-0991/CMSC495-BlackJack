@@ -15,6 +15,7 @@ public class Hand {
 	public static final int MAX_CARDS = 21;
 	private Card[] cards;
 	private int numCards = 0;
+	private boolean hasBusted = false;
 	
 	/**
 	 * A hand always starts empty.
@@ -58,16 +59,34 @@ public class Hand {
 		numCards = 0;
 	}
 	
+	/**
+	 * Gets the current hand value for a hand, takes into account ace values.
+	 * @return
+	 */
 	public int getHandValue() {
-		
+		int numberOfAces = 0;
 		int total = 0;
 		for (int i = 0; i < cards.length; i++)
 		{
-			total = Card.getValue(cards[i].getRank());
+			
+			if(cards[i] == null) {
+				break;
+			}
+			
+			if(cards[i].getRank() == Rank.ACE) {
+				numberOfAces++;
+			}
+			
+			total += Card.getValue(cards[i].getRank());
+			
+			if (total > 21 && numberOfAces > 0) {
+				total -= 10;
+				numberOfAces--;
+			}
 		}
-		
 		return total;
 	}
+
 	
 	public boolean showingAce() {
 		if(cards[1].getRank() == Rank.ACE)
@@ -79,5 +98,13 @@ public class Hand {
 		if(cards[0] == cards[1])
 			return true;
 		return false;
+	}
+	
+	public void busts(){
+		hasBusted = true;
+	}
+	
+	public boolean getBustStatus(){
+		return hasBusted;
 	}
 }

@@ -25,6 +25,7 @@ public class DealAction extends GameAction {
 		Deck deck = state.getDeck();
 		Hand playerHand = new Hand();
 		Hand dealerHand = new Hand();
+		panel.resetHands();
 		//Update panel based on state, see accessors below 
 		//for potentially required state objects
 		//state.getBetAmount()
@@ -33,11 +34,10 @@ public class DealAction extends GameAction {
 		//state.getDeck()
 		//state.getTurn()
 		
-		if(state.getTurn() == TurnState.AWAITING_DEAL && betAmount > state.getRoom().getMinBet() && betAmount < state.getRoom().getMaxBet()) {
+		if(state.getTurn() == TurnState.AWAITING_DEAL && betAmount >= state.getRoom().getMinBet() && betAmount <= state.getRoom().getMaxBet()) {
 			
 			//TODO GWT Timer can be used to deal cards at certain intervals until all cards
-			//are dealt, see http://www.gwtproject.org/javadoc/latest/com/google/gwt/user/client/Timer.html
-			
+			//are dealt, see http://www.gwtproject.org/javadoc/latest/com/google/gwt/user/client/Timer.html			
 			Card card = deck.draw();			
 			SoundManager.play(SoundName.PLACE1);
 			panel.dealPlayerCard(card);
@@ -45,18 +45,17 @@ public class DealAction extends GameAction {
 			
 			card = deck.draw();
 			SoundManager.play(SoundName.PLACE2);
-			panel.dealDealerCard(deck.draw());			
-			card = deck.draw();
+			panel.dealDealerCard(card);			
 			dealerHand.hit(card);
 			
 			card = deck.draw();
 			SoundManager.play(SoundName.PLACE3);
-			panel.dealPlayerCard(deck.draw());
+			panel.dealPlayerCard(card);
 			playerHand.hit(card);
 			
 			card = deck.draw();
 			SoundManager.play(SoundName.PLACE4);
-			panel.dealDealerCard(deck.draw());
+			panel.dealDealerCard(card);
 			dealerHand.hit(card);
 			
 		}
@@ -75,18 +74,21 @@ public class DealAction extends GameAction {
 		}			
 		else
 		{
-			panel.enabled(GameButtonType.DEAL, false);
-			panel.enabled(GameButtonType.HIT, true);
-			panel.enabled(GameButtonType.STAND, true);
+			panel.enableButton(GameButtonType.DEAL, false);
+			panel.enableButton(GameButtonType.HIT, true);
+			panel.enableButton(GameButtonType.STAND, true);
 			panel.chipsEnabled(false);
-			panel.enabled(GameButtonType.SURRENDER, true);			
-			panel.enabled(GameButtonType.DOUBLE_DOWN, true);
+			panel.enableButton(GameButtonType.SURRENDER, true);			
+			panel.enableButton(GameButtonType.DOUBLE_DOWN, true);
 			
 			if(dealerHand.showingAce())
-				panel.enabled(GameButtonType.INSURANCE, true);
+			{
+				panel.displayInstruction("Want Insurance?");
+				panel.enableButton(GameButtonType.INSURANCE, true);
+			}
 			
 			if(playerHand.canSplit())
-				panel.enabled(GameButtonType.SPLIT, true);
+				panel.enableButton(GameButtonType.SPLIT, true);
 			
 		}
 			//TODO call DealerAction.processAction(gameEvent)
