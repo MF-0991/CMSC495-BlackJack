@@ -14,37 +14,11 @@ public class DealerAI {
 	private GameController controller;
 	private BlackJackGamePanel gamePanel;
 	private Timer timer;
-<<<<<<< HEAD
 
-=======
-	
->>>>>>> 7233f25741261e4a6164e707421a036a5f47169c
 	public DealerAI(GameController controller, BlackJackGamePanel panel) {
 		this.controller = controller;
 		this.gamePanel = panel;
 	}
-<<<<<<< HEAD
-
-	public void startTurn(final GameEvent event) {
-		
-		timer = new Timer() {
-
-			@Override
-			public void run() {
-				while (GameState.getTurn() == TurnState.DEALER_TURN) {
-					processTurn(event);
-				}
-			}
-		};
-		
-		timer.scheduleRepeating(1000);
-	}
-
-	public void processTurn(GameEvent event) {
-		// TODO set to actual hand value from Jeffs update
-		int playerHandValue = 0;
-		
-=======
 	
 	public void startTurn(final GameEvent event) {
 		
@@ -86,7 +60,6 @@ public class DealerAI {
 			
 		}
 		
-		
 	}
 	
 	private boolean shouldHit(int playerHandValue, int dealerHandValue) {
@@ -107,7 +80,6 @@ public class DealerAI {
 		}
 		
 		return false;
->>>>>>> 7233f25741261e4a6164e707421a036a5f47169c
 	}
 
 }
