@@ -8,7 +8,7 @@ public class DealerAI {
 	private GameController controller;
 	
 	public DealerAI(GameController controller) {
-		
+		this.controller = controller;
 	}
 	
 	public void startTurn() {
@@ -17,6 +17,10 @@ public class DealerAI {
 			//TODO do some stuff with the dealer by creating GameActions (HIT, STAND) 
 			//until the dealer chooses to stand or busts, when that happens, update the GameState
 			//to PlayerTurn
+			
+			if () {
+				
+			}
 		}
 	}
 	

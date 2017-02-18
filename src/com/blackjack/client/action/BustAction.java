@@ -14,6 +14,16 @@ public class BustAction extends GameAction {
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * determines if the current turn busted (dealer or player)
+	 * 
+	 * if player busted, ends player's turn and invokes DealerTurnAction 
+	 * 		processAction(event)
+	 * if dealer busted, ends dealer's turn and invokes HandEndAction
+	 * 		processAction(event)
+	 * 
+	 *  //TODO identify possible exceptions
+	 */
 	@Override
 	public void processAction(GameEvent event) {
 		GameState state = event.getGameState();
